@@ -5,6 +5,7 @@ const Actions = {
   SET_ROOM_ID: "SET_ROOM_ID",
   SET_SHOW_OVERLAY: "SET_SHOW_OVERLAY",
   SET_PARTICIPANTS: "SET_PARTICIPANTS",
+  SET_MESSAGES: "SET_MESSAGES",
 };
 
 export const setIsRoomHost = (isRoomHost) => {
@@ -48,4 +49,12 @@ export const setParticipants = (participants) => {
     participants,
   };
 };
+
+export const setMessages = (messages) => {
+  return {
+    type: Actions.SET_MESSAGES,
+    messages,
+  };
+};
+
 export default Actions;

@@ -1,4 +1,4 @@
-import { setShowOverlay } from "../store/actions";
+import { setMessages, setShowOverlay } from "../store/actions";
 import store from "../store/store";
 import * as wss from "./wss";
 import Peer from "simple-peer";
@@ -51,6 +51,8 @@ const getConfiguration = () => {
   };
 };
 
+const messengerChannel = "messenger"
+
 export const prepareNewPeerConnection = (connUserSocketId, isInitiator) => {
   const configuration = getConfiguration();
 
@@ -58,6 +60,7 @@ export const prepareNewPeerConnection = (connUserSocketId, isInitiator) => {
     initiator: isInitiator,
     config: configuration,
     stream: localStream,
+    channelName: messengerChannel,
   });
 
   peers[connUserSocketId].on("signal", (data) => {
@@ -77,6 +80,11 @@ export const prepareNewPeerConnection = (connUserSocketId, isInitiator) => {
     addStream(stream, connUserSocketId);
     streams = [...streams, stream];
   });
+
+  peers[connUserSocketId].on('data',(data) => {
+    const messageData = JSON.parse(data)
+    appendNewMessage(messageData)
+  })
 };
 
 export const handleSignalingData = (data) => {
@@ -194,3 +202,31 @@ const switchVideoTracks = (stream) => {
     }
   }
 };
+////////////// Messages //////////////////////////
+
+const appendNewMessage = (messageData) => {
+  const messages = store.getState().messages
+  store.dispatch(setMessages([...messages, messageData]))
+}
+export const sendMessageUsingDataChannel = (messageContent) => {
+  // append this message locally
+  const identity = store.getState().identity
+
+  const localMessageData = {
+    content: messageContent,
+    identity,
+    messageCreatedByMe: true,
+  }
+  appendNewMessage(localMessageData)
+
+  const messageData = {
+    content: messageContent,
+    identity,
+  }
+
+  const stringifiedMessageData = JSON.stringify(messageData)
+
+  for(let socketId in peers){
+    peers[socketId].send(stringifiedMessageData)
+  }
+} 
