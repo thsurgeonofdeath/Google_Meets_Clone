@@ -7,7 +7,7 @@ const MicButton = () => {
 
   const handleMicButtonPressed = () => {
     setIsMicMuted(!isMicMuted);
-  }
+  };
 
   return (
     <div className="video_button_container">

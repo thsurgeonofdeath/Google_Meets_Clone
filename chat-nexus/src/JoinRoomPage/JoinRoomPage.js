@@ -3,9 +3,9 @@ import { useLocation } from "react-router-dom";
 import { connect } from "react-redux";
 import { setIsRoomHost } from "../store/actions";
 import JoinRoomTitle from "./JoinRoomTitle";
+import JoinRoomContent from "./JoinRoomContent";
 
 import "./JoinRoomPage.css";
-import JoinRoomContent from "./JoinRoomContent";
 
 const JoinRoomPage = (props) => {
   const { setIsRoomHostAction, isRoomHost } = props;

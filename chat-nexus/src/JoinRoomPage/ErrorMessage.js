@@ -1,13 +1,13 @@
-import React from 'react'
+import React from "react";
 
-const ErrorMessage = ({errorMessage}) => {
+const ErrorMessage = ({ errorMessage }) => {
   return (
     <div className="error_message_container">
       {errorMessage && (
         <p className="error_message_paragraph">{errorMessage}</p>
       )}
-    </div> 
-  )
-}
+    </div>
+  );
+};
 
-export default ErrorMessage
+export default ErrorMessage;

@@ -1,12 +1,12 @@
-import React from 'react'
-import VideoButtons from './VideoButtons'
+import React from "react";
+import VideoButtons from "./VideoButtons";
 
 const VideoSection = () => {
   return (
-    <div className='video_section_container'>
+    <div className="video_section_container">
       <VideoButtons />
     </div>
-  )
-}
+  );
+};
 
-export default VideoSection
+export default VideoSection;
