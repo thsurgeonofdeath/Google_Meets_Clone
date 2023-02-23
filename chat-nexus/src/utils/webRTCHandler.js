@@ -177,6 +177,8 @@ const addStream = (stream, connUserSocketId) => {
   const participant = participants.find(p => p.socketId === connUserSocketId)
   if(participant?.onlyAudio){
     videoContainer.appendChild(getAudioOnlyLabel(participant.identity))
+  }else{
+    videoContainer.style.position = 'static'
   }
   videosContainer.appendChild(videoContainer);
 };
