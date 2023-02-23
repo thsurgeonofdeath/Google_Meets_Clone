@@ -68,7 +68,7 @@ io.on("connection", (socket) => {
 const createNewRoomHandler = (data, socket) => {
   console.log("host is creating new room");
   console.log(data);
-  const { identity } = data;
+  const { identity, onlyAudio } = data;
 
   const roomId = uuidv4();
 
@@ -78,6 +78,7 @@ const createNewRoomHandler = (data, socket) => {
     id: uuidv4(),
     socketId: socket.id,
     roomId,
+    onlyAudio
   };
 
   // push that user to connectedUsers
@@ -102,13 +103,14 @@ const createNewRoomHandler = (data, socket) => {
 };
 
 const joinRoomHandler = (data, socket) => {
-  const { identity, roomId } = data;
+  const { identity, roomId, onlyAudio } = data;
 
   const newUser = {
     identity,
     id: uuidv4(),
     socketId: socket.id,
     roomId,
+    onlyAudio
   };
 
   // join room as user which just is trying to join room passing room id
