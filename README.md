@@ -7,9 +7,11 @@ this is an application based on google meets, where a maximum of 4 users can hav
 to run this application, clone this project, then first run the server project :
 - `cd server`
 - `npm start`
-then run the chat-nexus react application : 
--`cd chat-nexus`
+
+After running the node server, run the chat-nexus react application :
+- `cd chat-nexus`
 - `npm start`
+
 
 ### Screenshots of the application
 
